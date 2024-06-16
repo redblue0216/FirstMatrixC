@@ -43,10 +43,18 @@
 /*
 **矩阵分解运算相关操作函数声明
 */
-
-float addthree(float a,float b);
+// LU矩阵分解
+LUMatrix MatrixDecompositionLU(Matrix a);
+// Cholesky分解
+CholeskyMatrix MatrixDecompositionCholesky(Matrix a);
+// QR分解
+QRMatrix MatrixDecompositionQR(Matrix a);
 
 
 
 //结束条件编译
 #endif
+/***********************************************************************************/
+/***********************************************************************************/
+
+

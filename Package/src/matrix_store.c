@@ -122,6 +122,26 @@ REAL GetMatrixElement(Matrix matrix,INDEX i,INDEX j)
 }
 
 
+// 设置矩阵元素的具体值
+void SetMatrixElement(Matrix matrix,INDEX i,INDEX j,REAL element)
+/*
+**函数功能：
+**定义一个设置矩阵元素的具体值的函数
+**参数：
+**matrix (Matrix): 已分配好内存的矩阵结构
+**i (INDEX): 行索引
+**j (INDEX): 列索引
+**element (REAL): 元素值
+**返回：
+**无
+*/
+{
+    INDEX ij;
+    ij = TransformerIndex(matrix.column,i,j);
+    matrix.data[ij] = element;
+}
+
+
 // 设置矩阵归零
 void SetMatrixZero(Matrix matrix)
 /*

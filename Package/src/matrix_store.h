@@ -65,6 +65,8 @@ Matrix SetMatrixData(Matrix matrix,const REAL *array);
 INDEX TransformerIndex(INDEX i,INDEX j,INDEX matrix_column);
 // 获取矩阵元素
 REAL GetMatrixElement(Matrix matrix,INDEX i,INDEX j);
+// 设置矩阵元素的具体值
+VOID SetMatrixElement(Matrix matrix,INDEX i,INDEX j,REAL element);
 // 设置矩阵归零
 VOID SetMatrixZero(Matrix matrix);
 

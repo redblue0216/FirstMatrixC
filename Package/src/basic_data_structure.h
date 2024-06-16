@@ -94,6 +94,35 @@ typedef struct
 }AdjointMatrix;
 
 
+/*
+**LU分解矩阵数据结构
+*/
+typedef struct 
+{
+    Matrix L; // L矩阵
+    Matrix U; // U矩阵
+}LUMatrix;
+
+
+/*
+**Cholesky分解矩阵数据结构
+*/
+typedef struct 
+{
+    Matrix L; // L矩阵
+}CholeskyMatrix;
+
+
+/*
+**QR分解矩阵数据结构
+*/
+typedef struct
+{
+    Matrix Q; // Q矩阵
+    Matrix R; // R矩阵
+}QRMatrix;
+
+
 
 //结束条件编译
 #endif
