@@ -49,6 +49,12 @@ LUMatrix MatrixDecompositionLU(Matrix a);
 CholeskyMatrix MatrixDecompositionCholesky(Matrix a);
 // QR分解
 QRMatrix MatrixDecompositionQR(Matrix a);
+// SVD分解-ppp
+VOID ppp(Matrix a,Matrix e,Matrix s,Matrix v,INTEGER m,INTEGER n);
+// SVD分解-sss
+VOID sss(REAL fg[2],REAL cs[2]);
+// SVD分解
+SVDMatrix MatrixDecompositionSVD(Matrix a,REAL eps);
 
 
 

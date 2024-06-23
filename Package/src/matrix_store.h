@@ -69,7 +69,8 @@ REAL GetMatrixElement(Matrix matrix,INDEX i,INDEX j);
 VOID SetMatrixElement(Matrix matrix,INDEX i,INDEX j,REAL element);
 // 设置矩阵归零
 VOID SetMatrixZero(Matrix matrix);
-
+// 求取最大值宏
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 
 //结束条件编译

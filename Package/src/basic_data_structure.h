@@ -123,6 +123,17 @@ typedef struct
 }QRMatrix;
 
 
+/*
+**SVD分解矩阵数据结构
+*/
+typedef struct 
+{
+    Matrix A; // A矩阵
+    Matrix U; // U矩阵
+    Matrix V; // V矩阵
+}SVDMatrix;
+
+
 
 //结束条件编译
 #endif

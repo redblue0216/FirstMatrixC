@@ -250,4 +250,22 @@ void main(void)
     printf("The test element of g8 matrix is %f\n",g8.data[9]);
     printf("The test q element of g8_qr matrix is %f\n",qr_matrix.Q.data[12]);
     printf("The test r element of g8_qr matrix is %f\n",qr_matrix.R.data[8]);
+    /*
+    **矩阵SVD分解运算测试
+    */
+   printf("==============================>>>>>> This is a MatrixDecompositionSVD function test!\n");
+   Matrix g9 = CreateMatrix(4,3);
+   float array_g9[] = {1,1,-1,
+                       2,1,0,
+                       1,-1,0,
+                       -1,2,1};
+    SetMatrixData(g9,array_g9);
+    // SVDMatrix svd_matrix;
+    SVDMatrix svd_matrix;
+    REAL eps = 0.000001;
+    svd_matrix = MatrixDecompositionSVD(g9,eps);
+    printf("The test element of g9 matrix is %f\n",g9.data[0]);
+    printf("The test aa element of g9_svd matrix is %f\n",svd_matrix.A.data[0]);
+    printf("The test u element of g9_svd matrix is %f\n",svd_matrix.U.data[0]);
+    printf("The test v element of g9_svd matrix is %f\n",svd_matrix.V.data[0]);
 }
