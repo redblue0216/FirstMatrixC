@@ -55,7 +55,8 @@ VOID ppp(Matrix a,Matrix e,Matrix s,Matrix v,INTEGER m,INTEGER n);
 VOID sss(REAL fg[2],REAL cs[2]);
 // SVD分解
 SVDMatrix MatrixDecompositionSVD(Matrix a,REAL eps);
-
+// EVD分解
+EVDMatrix MatrixDecompositionEVD(Matrix a,REAL eps);
 
 
 //结束条件编译

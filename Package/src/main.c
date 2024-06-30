@@ -268,4 +268,22 @@ void main(void)
     printf("The test aa element of g9_svd matrix is %f\n",svd_matrix.A.data[0]);
     printf("The test u element of g9_svd matrix is %f\n",svd_matrix.U.data[0]);
     printf("The test v element of g9_svd matrix is %f\n",svd_matrix.V.data[0]);
+    /*
+    **矩阵EVD分解运算测试
+    */
+   printf("==============================>>>>>> This is a MatrixDecompositionEVD function test!\n");
+   Matrix g10 = CreateMatrix(3,3);
+   float array_g10[] = {2,-1,0,
+                       -1,2,-1,
+                       0,-1,2};
+    SetMatrixData(g10,array_g10);
+    // EVDMatrix evd_matrix;
+    EVDMatrix evd_matrix;
+    // REAL eps = 0.000001;
+    evd_matrix = MatrixDecompositionEVD(g10,eps);
+    printf("The test element of g10 matrix is %f\n",g10.data[0]);
+    printf("The test aa element of g10_evd matrix is %f\n",evd_matrix.A.data[0]);
+    printf("The test v element of g10_evd matrix is %f\n",evd_matrix.V.data[0]);
+    printf("The test v element of g10_evd matrix is %f\n",evd_matrix.V.data[1]);
+    printf("The test v element of g10_evd matrix is %f\n",evd_matrix.V.data[2]);
 }

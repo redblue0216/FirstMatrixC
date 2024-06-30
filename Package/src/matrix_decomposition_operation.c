@@ -826,8 +826,125 @@ SVDMatrix MatrixDecompositionSVD(Matrix a,REAL eps)
     svd_matrix.U = u;
     svd_matrix.V = v;
     return svd_matrix;
-    }
+}
 
+
+// EVD分解
+EVDMatrix MatrixDecompositionEVD(Matrix a,REAL eps)
+/*
+**函数功能：
+**定义一个EVD矩阵分解函数
+**参数：
+**a (Matrix): 矩阵a
+**eps (REAL): 精度eps
+**返回:
+**evd_matrix (EVDMatrix): EVD矩阵
+*/
+{
+    // 声明索引变量和相关数据结构
+    INTEGER i,j,p,q,u,w,t,s,count;
+    REAL fm,cn,sn,omega,x,y,d;
+    INTEGER m,n,ka;
+    m = a.row;
+    n = a.column;
+    ka = MAX(m,n);
+    Matrix v = CreateMatrix(ka,ka);
+    v.data = (REAL *)malloc(ka * ka * sizeof(REAL));
+    // 创建缓存矩阵数据结构
+    Matrix aa = CreateMatrix(a.row,a.column);
+    aa.data = (REAL *)malloc(a.row * a.column * sizeof(REAL));
+    EVDMatrix evd_matrix;
+    // 用零值填充U,V矩阵
+    SetMatrixZero(v);
+    // 复制a矩阵到ac矩阵中，避免修改原始矩阵
+    for (i=0;i<=aa.row*aa.column;i++)
+    {
+        aa.data[i] = a.data[i];
+    }
+    // 重置SVD矩阵
+    evd_matrix.A = aa;
+    evd_matrix.V = v;
+    // 开始运算
+    for (i=0; i<n; i++)
+    {
+        for (j=i+1; j<n; j++)
+        {
+            if (aa.data[i*n+j]!=aa.data[j*n+i])
+            {
+                printf("EVD decomposition failed! \n");  
+                return evd_matrix;
+            }
+        }
+    }
+    for (i=0; i<=n-1; i++)
+    { 
+        v.data[i*n+i]=1.0;
+        for (j=0; j<=n-1; j++)
+        {
+            if (i!=j) 
+            {
+                v.data[i*n+j]=0.0;
+            }
+        }
+    }
+    count=1;
+    while (count<=200)
+    { 
+        fm=0.0;
+        for (i=1; i<=n-1; i++)
+        {
+            for (j=0; j<=i-1; j++)
+            { 
+                d=fabs(aa.data[i*n+j]);
+                if ((i!=j)&&(d>fm))  { fm=d; p=i; q=j;}
+            }
+        }
+        if (fm<eps)   {return evd_matrix;}
+        count=count+1;
+        u=p*n+q; w=p*n+p; t=q*n+p; s=q*n+q;
+        x=-aa.data[u]; y=(aa.data[s]-aa.data[w])/2.0;
+        omega=x/sqrt(x*x+y*y);
+        if (y<0.0) {omega=-omega;}
+        sn=1.0+sqrt(1.0-omega*omega);
+        sn=omega/sqrt(2.0*sn);
+        cn=sqrt(1.0-sn*sn);
+        fm=aa.data[w];
+        aa.data[w]=fm*cn*cn+aa.data[s]*sn*sn+aa.data[u]*omega;
+        aa.data[s]=fm*sn*sn+aa.data[s]*cn*cn-aa.data[u]*omega;
+        aa.data[u]=0.0; aa.data[t]=0.0;
+        for (j=0; j<=n-1; j++)
+        {
+            if ((j!=p)&&(j!=q))
+            { 
+                u=p*n+j; w=q*n+j;
+                fm=aa.data[u];
+                aa.data[u]=fm*cn+aa.data[w]*sn;
+                aa.data[w]=-fm*sn+aa.data[w]*cn;
+            }
+        }
+        for (i=0; i<=n-1; i++)
+        {
+            if ((i!=p)&&(i!=q))
+            { 
+                u=i*n+p; w=i*n+q;
+                fm=aa.data[u];
+                aa.data[u]=fm*cn+aa.data[w]*sn;
+                aa.data[w]=-fm*sn+aa.data[w]*cn;
+            }
+        }
+        for (i=0; i<=n-1; i++)
+        { 
+            u=i*n+p; w=i*n+q;
+            fm=v.data[u];
+            v.data[u]=fm*cn+v.data[w]*sn;
+            v.data[w]=-fm*sn+v.data[w]*cn;
+        }
+    }
+    // 重新配置evd_matrix数据
+    evd_matrix.A = aa;
+    evd_matrix.V = v;
+    return evd_matrix;
+}
 
 
 /*********************************************************************************************/

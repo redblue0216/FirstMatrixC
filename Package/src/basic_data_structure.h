@@ -134,6 +134,15 @@ typedef struct
 }SVDMatrix;
 
 
+/*
+**Jacobi特征值分解数据结构
+*/
+typedef struct 
+{
+    Matrix A; // A矩阵
+    Matrix V; // V矩阵
+}EVDMatrix;
+
 
 //结束条件编译
 #endif
