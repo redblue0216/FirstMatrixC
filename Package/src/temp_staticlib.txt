@@ -1,0 +1,9 @@
+文件结构
+--src
+makefile
+
+makefile文件同级目录下执行make
+
+将.a静态链接库移动到src下，和main同级目录
+src目录下执行以下命令
+gcc main.c -o test -I./ -L./ -lFirstMatrixC -lm -lc

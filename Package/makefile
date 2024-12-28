@@ -1,41 +1,35 @@
-# 相关编译指令
-SOURCE_MATRIX_STORE := matrix_store.c
-OBJS_MATRIX_STORE := matrix_store.o   
-SOURCE_MATRIX_BASIC_OPERATION := matrix_basic_operation.c
-OBJS_MATRIX_BASIC_OPERATION := matrix_basic_operation.o
-TARGET := libFirstMatrixC.a
+# 定义编译器
+CC = gcc
 
+# 定义归档工具
+AR = ar
 
-# 编译相关参数
-CC := gcc
-LIBS := 
-LDFLAGS := -L
-DEFINES :=
-INCULDE :=
-CFLAGS := 
-CXXFLAGS := 
+# 定义编译选项
+CFLAGS = -Wall
 
+# 定义静态库的名称
+LIB_NAME = libFirstMatrixC.a
 
-# 归档命令
-AR := ar
+# 定义源文件列表（假设所有源文件都在 src 目录下）
+SOURCES = matrix_store.c matrix_basic_operation.c matrix_decomposition_operation.c
+# 定义源文件的路径
+SOURCES_PATH = ./src/
 
+# 定义目标文件列表（.o 文件）
+OBJECTS = $(patsubst %.c,$(SOURCES_PATH)%.o,$(SOURCES))
 
-# 编译操作
-	cd ./src
+# 默认目标
+all: $(LIB_NAME)
 
-$(OBJS_MATRIX_STORE):$(SOURCE_MATRIX_STORE)
-	$(CC) $(SOURCE_MATRIX_STORE) -o $(OBJS_MATRIX_STORE) -c
+# 静态库规则
+$(LIB_NAME): $(OBJECTS)
+	$(AR) rcs $@ $^
 
-$(OBJS_MATRIX_BASIC_OPERATION):$(SOURCE_MATRIX_BASIC_OPERATION)
-	$(CC) $(SOURCE_MATRIX_BASIC_OPERATION) -o $(OBJS_MATRIX_BASIC_OPERATION) -c
+# 从源文件生成目标文件的规则
+$(SOURCES_PATH)%.o: $(SOURCES_PATH)%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-
-# 链接操作
-
-
-# 归档操作
-$(AR) -rcs $(TARGET) $(OBJS_MATRIX_STORE) $(OBJS_MATRIX_BASIC_OPERATION)
-
-
-# 清空缓存
-	rm -rf *.o
+# 清理规则
+.PHONY: clean
+clean:
+	rm -f $(OBJECTS) $(LIB_NAME)
