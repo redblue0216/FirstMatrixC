@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: firstmatrixc
+Version: 0.2.1
+Summary: firstmatrixc is a ptyhon interface package that uses ctypes to encapsulate the C language matrix computation library.
+Author: shihua
+Author-email: 15021408795@163.com
+License: BSD 3 clause
+Requires-Python: >=3.9.13

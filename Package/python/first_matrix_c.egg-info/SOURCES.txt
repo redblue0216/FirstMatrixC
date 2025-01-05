@@ -1,0 +1,9 @@
+MANIFEST.in
+setup.py
+first_matrix_c.egg-info/PKG-INFO
+first_matrix_c.egg-info/SOURCES.txt
+first_matrix_c.egg-info/dependency_links.txt
+first_matrix_c.egg-info/top_level.txt
+firstmatrixc/__init__.py
+firstmatrixc/data_declaration.py
+firstmatrixc/utils.py

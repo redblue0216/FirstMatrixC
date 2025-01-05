@@ -1,0 +1,2 @@
+include firstmatrixc/first_matrix_c.so
+graft firstmatrixc/test
